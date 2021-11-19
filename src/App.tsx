@@ -13,7 +13,7 @@ const App: FC = () => {
   
   const [countries, setCountries] = useState<any[]>([])
   const [countryNames, setCountryNames] = useState<string[]>([])
-  const [countryRegions, setCountryRegions] = useState<string[]>([])
+  const [regions, setRegions] = useState<string[]>([])
   const [countryCodeObj, setCountryCodeObj] = useState<any>({})
 
   
@@ -35,7 +35,7 @@ const App: FC = () => {
           countryRegionSet.add(country.region)
         })
         setCountryNames(countryNameArr)
-        setCountryRegions(Array.from(countryRegionSet))
+        setRegions(Array.from(countryRegionSet))
         codeObj = countriesData[0].reduce((country: any, curr: any) => ({
           ...country, [curr.cca3]: curr.name.common
         }), {})
@@ -46,16 +46,16 @@ const App: FC = () => {
     //countriesData = [...countriesData, getCountries()]
     getCountries()
   }, [])
-console.log(countryRegions)
-console.log(countryCodeObj)
+console.log(regions)
+
   return (
     <BrowserRouter>
     <Nav/>
       <div className="App">
         <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/countries' element={<Countries countries={countries} />} />
-          <Route path='countries/showpage/:country' element={<ShowPage countries={countries} countryCodeObj={countryCodeObj}/>} />
+          <Route path='/' element={<Home regions={regions} />}/>
+          <Route path='/countries/:region' element={<Countries countries={countries} />} />
+          <Route path='countries/:region/showpage/:country' element={<ShowPage countries={countries} countryCodeObj={countryCodeObj}/>} />
         </Routes>
       </div>
     </BrowserRouter>

@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 interface Props {
     countries: any[]
@@ -18,10 +19,10 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                 if ( nation.name.common === params.country ) {
                  
                     return <>
-                                <h3>{nation.name.common}, Capital: {nation.capital[0]}</h3>
+                                <h3>{nation.name.common}, Capital: {nation.capital?.map((cap:string)=> {return cap})}</h3>
                                 <div>
                                     { 
-                                        nation.borders.map((code: string, i: number)=> {
+                                        nation.borders?.map((code: string, i: number)=> {
                                             return <button key={code + i}>{countryCodeObj[code]}</button>
                                         })
                                     }
