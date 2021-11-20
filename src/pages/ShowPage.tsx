@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+
 
 interface Props {
     countries: any[]
@@ -12,18 +12,24 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
 
     let params = useParams()
    
+    const [countryParam, setCountryParam] = useState<string | undefined>(params.country)
+
+    useEffect(()=> {
+        setCountryParam(countryParam)
+    }, [countryParam])
+  
     return(
         <div>
             <h1>Show Page</h1>
             <div>{countries.map(nation=> {
-                if ( nation.name.common === params.country ) {
+                if ( nation.name.common === countryParam ) {
                  
                     return <>
                                 <h3>{nation.name.common}, Capital: {nation.capital?.map((cap:string)=> {return cap})}</h3>
                                 <div>
                                     { 
                                         nation.borders?.map((code: string, i: number)=> {
-                                            return <button key={code + i}>{countryCodeObj[code]}</button>
+                                            return <button onClick={()=> setCountryParam(countryCodeObj[code])} key={code + i}>{countryCodeObj[code]}</button>
                                         })
                                     }
                                 </div>
