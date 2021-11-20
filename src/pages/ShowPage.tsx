@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
 const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
 
     let params = useParams()
+    let navigate = useNavigate()
    
     const [countryParam, setCountryParam] = useState<string | undefined>(params.country)
 
@@ -36,7 +37,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                             </>
                 }
             })}</div>
-
+        <button onClick={()=> navigate(-1)}>BACK</button>
         </div>
     )
 }

@@ -43,14 +43,14 @@ const App: FC = () => {
       })
       
     }
-    //countriesData = [...countriesData, getCountries()]
+    
     getCountries()
   }, [])
 console.log(regions)
 
   return (
     <BrowserRouter>
-    <Nav/>
+    <Nav regions={regions}/>
       <div className="App">
         <Routes>
           <Route path='/' element={<Home regions={regions} />}/>
