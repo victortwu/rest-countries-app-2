@@ -10,28 +10,41 @@ const Nav: FC<Props> = ( { regions } ) => {
     
     const [dropMenu, setDropMenu] = useState<boolean>(false)
     
-    const showClass: string = dropMenu ? style.mainNav : style.hide
+    const showClass: string = dropMenu ? style.mainMenuWrap : style.hide
 
     const toggleMainMenu = ():void => {
         setDropMenu(!dropMenu)
     }
     
     return(
+        <>
+        
         <nav className={style.container}>
             <div className={style.countrySearch}>placeholder</div>
+            
             <div onClick={()=> toggleMainMenu()} className={style.hamburger}>
                 <div className={style.hamLine}/>
                 <div className={style.hamLine}/>
                 <div className={style.hamLine}/>
             </div>
-            <div className={showClass}>
-                <Link to='/'>Home</Link>
-                {regions.map(reg=> {
-                    return <Link to={'/countries/' + reg}>{reg}</Link>
-                })}
-            
-            </div>
         </nav>
+
+        <div onClick={()=> {
+            toggleMainMenu()
+        }} className={showClass}>
+                <div onClick={(e)=> e.stopPropagation()} className={style.hamMenu}>
+                    <Link to='/' onClick={()=> {
+                        toggleMainMenu()
+                    }}>Home</Link>
+                    {regions.map(reg=> {
+                        return <Link onClick={()=> {
+                            toggleMainMenu()
+                        }} to={'/countries/' + reg}>{reg}</Link>
+                    })}
+                </div>
+        </div>
+        
+        </>
     )
 }
 
