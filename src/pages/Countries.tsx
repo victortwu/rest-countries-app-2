@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
 interface Props {
     countries: any[]
@@ -15,8 +16,8 @@ const Countries: FC<Props> = ( { countries } ) => {
             <ul>
                 {countries.map(country=> {
                     if (country.region === params.region) {
-                        return <Link to={`showpage/${country.name.common}`}>
-                        <li key={country.name.common}>{country.name.common}</li>
+                        return <Link key={uuidv4()} to={`showpage/${country.name.common}`}>
+                        <li>{country.name.common}</li>
                         </Link>
                     }
                    

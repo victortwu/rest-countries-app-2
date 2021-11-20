@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import baseUrl from '../data/baseUrl'
 import style from '../cssModules/dropDownSearch.module.css'
 
@@ -32,10 +33,10 @@ const DropDownSearch: FC<Props> = ( { countryNames } ) => {
         }} className={toggleMenu}>
             <div className={style.dropMenu}>
                 {countryNames.map(name=> {
-                  return <a href={baseUrl + '/countries/:region/showpage/' + name}><span key={name} onClick={()=> {
-                      toggleDropDown()
-                     
-                  }}>{name}</span></a>
+                  return <a key={uuidv4()} href={baseUrl + '/countries/:region/showpage/' + name} onClick={()=> {
+                    toggleDropDown()
+                   
+                    }}>{name}</a>
                 })}
             </div>
         </div>

@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
 
 interface Props {
@@ -25,16 +26,16 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
             <div>{countries.map(nation=> {
                 if ( nation.name.common === countryParam ) {
                  
-                    return <>
-                                <h3>{nation.name.common}, Capital: {nation.capital?.map((cap:string)=> {return cap})}</h3>
+                    return <div key={uuidv4()}>
+                                <h3>{nation.name.common}, Capital: {nation.capital?.map((cap:string)=> {return <span key={uuidv4()}>{cap}</span>})}</h3>
                                 <div>
                                     { 
                                         nation.borders?.map((code: string, i: number)=> {
-                                            return <button onClick={()=> setCountryParam(countryCodeObj[code])} key={code + i}>{countryCodeObj[code]}</button>
+                                            return <button onClick={()=> setCountryParam(countryCodeObj[code])} key={uuidv4()}>{countryCodeObj[code]}</button>
                                         })
                                     }
                                 </div>
-                            </>
+                            </div>
                 }
             })}</div>
         <button onClick={()=> navigate(-1)}>BACK</button>

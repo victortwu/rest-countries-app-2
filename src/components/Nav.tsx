@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 import DropDownSearch from './DropDownSearch'
 import style from '../cssModules/nav.module.css'
 
@@ -39,7 +40,7 @@ const Nav: FC<Props> = ( { regions, countryNames } ) => {
                         toggleMainMenu()
                     }}>Home</Link>
                     {regions.map(reg=> {
-                        return <Link key={reg} onClick={()=> {
+                        return <Link key={uuidv4()} onClick={()=> {
                             toggleMainMenu()
                         }} to={'/countries/' + reg}>{reg}</Link>
                     })}

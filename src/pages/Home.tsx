@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Link } from 'react-router-dom'
+import { v4 as uuidv4 } from 'uuid'
 
 interface Props {
     regions: string[]
@@ -10,8 +11,8 @@ const Home: FC<Props> = ( { regions } ) => {
         <div>
             <h1>Home</h1>
             {regions.map(reg=> {
-                return <Link to={'/countries/' + reg}>
-                            <div key={reg}>{reg}</div>
+                return <Link key={uuidv4()} to={'/countries/' + reg}>
+                            <div>{reg}</div>
                         </Link> 
                 
             })}
