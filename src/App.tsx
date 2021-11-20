@@ -50,7 +50,7 @@ console.log(regions)
 
   return (
     <BrowserRouter>
-    <Nav regions={regions}/>
+    <Nav regions={regions} countryNames={countryNames}/>
       <div className="App">
         <Routes>
           <Route path='/' element={<Home regions={regions} />}/>

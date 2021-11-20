@@ -1,12 +1,14 @@
 import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
+import DropDownSearch from './DropDownSearch'
 import style from '../cssModules/nav.module.css'
 
 interface Props {
     regions: string[]
+    countryNames: string[]
 }
 
-const Nav: FC<Props> = ( { regions } ) => {
+const Nav: FC<Props> = ( { regions, countryNames } ) => {
     
     const [dropMenu, setDropMenu] = useState<boolean>(false)
     
@@ -20,7 +22,7 @@ const Nav: FC<Props> = ( { regions } ) => {
         <>
         
         <nav className={style.container}>
-            <div className={style.countrySearch}>placeholder</div>
+            <DropDownSearch countryNames={countryNames}/>
             
             <div onClick={()=> toggleMainMenu()} className={style.hamburger}>
                 <div className={style.hamLine}/>
@@ -37,7 +39,7 @@ const Nav: FC<Props> = ( { regions } ) => {
                         toggleMainMenu()
                     }}>Home</Link>
                     {regions.map(reg=> {
-                        return <Link onClick={()=> {
+                        return <Link key={reg} onClick={()=> {
                             toggleMainMenu()
                         }} to={'/countries/' + reg}>{reg}</Link>
                     })}
