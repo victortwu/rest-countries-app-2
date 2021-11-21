@@ -5,7 +5,7 @@ const TestComponent = () => {
 
     const { data, countryNames, regions, countryCodeObj, isPending, error } = useFetchEverything('https://restcountries.com/v3.1/all')
 
-    console.log('FROM TEST: ', data)
+    console.log('FROM TEST: ', regions)
     return(
         <div>
             <h2>

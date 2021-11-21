@@ -18,7 +18,7 @@ const useFetchEverything = (url: string) => {
                 let countryRegionSet = new Set<string>()
                 let codeObj: object = {}
                 
-                 const res = await fetch(url)
+                 await fetch(url)
                     .then(res => {
                         if (!res.ok) {
                             throw Error('Could not get data from resource.')
