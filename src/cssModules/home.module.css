@@ -1,0 +1,28 @@
+.container {
+    
+    height: 100%;
+    width: 100%;
+   
+}
+
+.title {
+    color: var(--gray1)
+}
+
+.cardContainer {
+    height: 80%;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.card {
+    background-color: var(--gray3);
+    margin: .5rem;
+    height: 10rem;
+    width: 15rem;
+    color: var(--gray1);
+    border-radius: .5rem;
+    box-shadow: 0 0 .5rem .01rem gray;
+}

@@ -16,8 +16,9 @@ const App: FC = () => {
 
   return (
     <BrowserRouter>
-    <Nav  countryNames={countryNames} regions={regions}/>
+   
       <div className="App">
+      <Nav  countryNames={countryNames} regions={regions}/>
         <Routes>
           <Route path='/' element={<Home regions={regions}/>}/>
           <Route path='/countries/:region' element={<Countries countries={countries} />} />
