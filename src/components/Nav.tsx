@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import DropDownSearch from './DropDownSearch'
@@ -12,13 +12,28 @@ interface Props {
 const Nav: FC<Props> = ( { countryNames, regions } ) => {
     
     const [dropMenu, setDropMenu] = useState<boolean>(false)
+
+    const hamMenuRef = useRef<HTMLDivElement>(null)
     
     const showClass: string = dropMenu ? style.mainMenuWrap : style.hide
 
-    const toggleMainMenu = ():void => {
-        setDropMenu(!dropMenu)
-    }
     
+    
+    const toggleMainMenu = ():void => {
+       
+        if (  dropMenu ) {
+            console.log('SLIDE IT BACK')
+           
+            setTimeout(()=> {
+                setDropMenu(false)
+            }, 0)
+        } else {
+            setDropMenu(true)
+   
+            
+        }
+    }
+ 
     return(
         <>
         
@@ -35,7 +50,7 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
         <div onClick={()=> {
             toggleMainMenu()
         }} className={showClass}>
-              <div onClick={(e)=> e.stopPropagation()} className={style.hamMenu}>
+              <div ref={hamMenuRef} onClick={(e)=> e.stopPropagation()} className={`${style.hamMenu}`}>
                     <Link to='/' onClick={()=> {
                         toggleMainMenu()
                     }}>Home</Link>

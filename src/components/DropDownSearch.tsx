@@ -33,7 +33,7 @@ const DropDownSearch: FC<Props> = ( { countryNames } ) => {
         }} className={toggleMenu}>
             <div className={style.dropMenu}>
                 {countryNames.map(name=> {
-                  return <a key={uuidv4()} href={baseUrl + '/countries/:region/showpage/' + name} onClick={()=> {
+                  return <a className={style.link} key={uuidv4()} href={baseUrl + '/countries/:region/showpage/' + name} onClick={()=> {
                     toggleDropDown()
                    
                     }}>{name}</a>

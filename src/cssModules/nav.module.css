@@ -8,8 +8,6 @@
    
 }
 
-
-
 .mainMenuWrap {
    position: absolute;
    top: 5rem;
@@ -21,11 +19,29 @@
 
 .hamMenu {
     position: absolute;
-    background-color: blue;
+    background-color: var(--gray2);
+    width: 50%;
+    height: 80%;
+    padding: 1rem;
     top: 0;
     right: 0;
+    text-align: left;
+    font-size: larger;
     display: flex;
+    justify-content: space-between;
     flex-direction: column;
+    border-top-left-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    box-shadow: 0 0 .6rem .01rem gray;
+    animation: slideIn .5s forwards;
+}
+
+/* .animateSlideIn {
+    animation: slideIn 1s forwards;
+} */
+
+.animateSlideOut {
+    animation: slideOut 1s forwards;
 }
 
 .hamburger {
@@ -35,7 +51,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    
 }
+
+
 
 .hamLine {
     background-color: black;
@@ -46,4 +65,26 @@
 
 .hide {
     display: none;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(500px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOut {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }

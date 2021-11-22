@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
+import style from '../cssModules/showPage.module.css'
 
 
 interface Props {
@@ -21,7 +22,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
     }, [countryParam])
   
     return(
-        <div>
+        <div className={style.container}>
             <h1>Show Page</h1>
             <div>{countries.map(nation=> {
                 if ( nation.name.common === countryParam ) {
