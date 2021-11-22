@@ -5,11 +5,11 @@ import DropDownSearch from './DropDownSearch'
 import style from '../cssModules/nav.module.css'
 
 interface Props {
-    //regions: string[]
+    regions: string[]
     countryNames: string[]
 }
 
-const Nav: FC<Props> = ( { countryNames } ) => {
+const Nav: FC<Props> = ( { countryNames, regions } ) => {
     
     const [dropMenu, setDropMenu] = useState<boolean>(false)
     
@@ -35,7 +35,16 @@ const Nav: FC<Props> = ( { countryNames } ) => {
         <div onClick={()=> {
             toggleMainMenu()
         }} className={showClass}>
-              
+              <div onClick={(e)=> e.stopPropagation()} className={style.hamMenu}>
+                    <Link to='/' onClick={()=> {
+                        toggleMainMenu()
+                    }}>Home</Link>
+                    {regions.map(reg=> {
+                        return <Link key={uuidv4()} onClick={()=> {
+                            toggleMainMenu()
+                        }} to={'/countries/' + reg}>{reg}</Link>
+                    })}
+                </div>
         </div>
         
         </>
@@ -44,13 +53,3 @@ const Nav: FC<Props> = ( { countryNames } ) => {
 
 export default Nav
 
-{/* <div onClick={(e)=> e.stopPropagation()} className={style.hamMenu}>
-<Link to='/' onClick={()=> {
-    toggleMainMenu()
-}}>Home</Link>
-{regions.map(reg=> {
-    return <Link key={uuidv4()} onClick={()=> {
-        toggleMainMenu()
-    }} to={'/countries/' + reg}>{reg}</Link>
-})}
-</div> */}

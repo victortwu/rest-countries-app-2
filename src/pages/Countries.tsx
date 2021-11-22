@@ -10,6 +10,8 @@ const Countries: FC<Props> = ( { countries } ) => {
     
     let params = useParams()
     
+    
+
     return (
         <div>
             <h1>Countries Page, Region: {params.region}</h1>

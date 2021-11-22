@@ -1,19 +1,17 @@
 import React, { FC, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
-import useFetchEverything from '../useFetchEverything'
-import countriesAllUrl from '../data/countriesAllUrl'
 
-// interface Props {
-//     regions: string[]
-// }
 
-const Home: FC = (  ) => {
+interface Props {
+    regions: string[]
+}
+
+const Home: FC<Props> = ( { regions } ) => {
     
     
 
-    const { regions } = useFetchEverything(countriesAllUrl)
-
+    
     
     return(
         <div>
