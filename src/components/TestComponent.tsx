@@ -8,9 +8,8 @@ const TestComponent = () => {
     const [toggled, setToggled] = React.useState<boolean>(false)
 
     const fading = useSpring({
-        
-        from: { opacity: 0 },
-        to: { opacity: toggled ? 1 : 0 }
+        from: { opacity: 0, translateX: -150  },
+        to: { opacity: toggled ? 1 : 0, translateX: toggled ? 0 : -200 }
     })
 
     const { data, countryNames, regions, countryCodeObj, isPending, error } = useFetchEverything('https://restcountries.com/v3.1/all')
