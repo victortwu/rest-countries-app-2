@@ -25,7 +25,7 @@
     flex-direction: column;
     flex-wrap:initial;
     justify-content: space-between;
-    animation: dropDown .5s;
+    /* animation: dropDown .5s; */
 }
 
 .link {

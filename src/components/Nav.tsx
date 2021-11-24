@@ -1,8 +1,9 @@
-import React, { FC, useState, useRef } from 'react'
+import React, { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import DropDownSearch from './DropDownSearch'
 import style from '../cssModules/nav.module.css'
+import { useSpring, animated } from 'react-spring'
 
 interface Props {
     regions: string[]
@@ -13,24 +14,28 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
     
     const [dropMenu, setDropMenu] = useState<boolean>(false)
 
-    const hamMenuRef = useRef<HTMLDivElement>(null)
+    const [hideMenu, setHideMenu] = useState<boolean>(true)
     
-    const showClass: string = dropMenu ? style.mainMenuWrap : style.hide
+    const showClass: string = hideMenu ? style.hide : style.mainMenuWrap
 
-    
+    const slideMenuStyle = useSpring({
+        from: { opacity: 0, translateX: 500  },
+        to: { opacity: dropMenu ? 1 : 0, translateX: dropMenu ? 0 : 500 },
+        config: { duration: 200 }
+    })
     
     const toggleMainMenu = ():void => {
        
-        if (  dropMenu ) {
-            console.log('SLIDE IT BACK')
+        if ( dropMenu ) {
+           setDropMenu(false)
            
-            setTimeout(()=> {
-                setDropMenu(false)
-            }, 0)
+           setTimeout(()=> {
+                setHideMenu(true)
+           }, 300)
+        
         } else {
+            setHideMenu(false)
             setDropMenu(true)
-   
-            
         }
     }
  
@@ -50,7 +55,7 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
         <div onClick={()=> {
             toggleMainMenu()
         }} className={showClass}>
-              <div ref={hamMenuRef} onClick={(e)=> e.stopPropagation()} className={`${style.hamMenu}`}>
+              <animated.div style={slideMenuStyle} onClick={(e)=> e.stopPropagation()} className={style.hamMenu}>
                     <Link to='/' onClick={()=> {
                         toggleMainMenu()
                     }}>Home</Link>
@@ -59,7 +64,7 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
                             toggleMainMenu()
                         }} to={'/countries/' + reg}>{reg}</Link>
                     })}
-                </div>
+                </animated.div>
         </div>
         
         </>
