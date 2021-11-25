@@ -1,6 +1,42 @@
 .container {
+    width: 100%;
+    height: 100vh;
+
     animation: fadeIn 1s;
 }
+
+.contentDiv {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.containerLeft, .containerRight {
+  padding: 1rem;
+  text-align: left;
+}
+
+.containerLeft {
+
+  width: 45%;
+
+}
+
+.imgContainer {
+  width: 80%;
+
+}
+
+.imgContainer > img {
+  max-width: 100%;
+}
+
+.containerRight {
+  width: 45%;
+
+}
+
 
 @keyframes fadeIn {
     0% { opacity: 0 }
