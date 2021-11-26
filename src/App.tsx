@@ -14,6 +14,7 @@ const App: FC = () => {
   
   const { data: countries, countryNames, regions, countryCodeObj, isPending, error } = useFetchEverything(countriesAllUrl)
 
+  console.log(countries[10])
   return (
     <BrowserRouter>
    
