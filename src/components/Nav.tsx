@@ -1,5 +1,5 @@
 import React, { FC, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import DropDownSearch from './DropDownSearch'
 import style from '../cssModules/nav.module.css'
@@ -11,6 +11,12 @@ interface Props {
 }
 
 const Nav: FC<Props> = ( { countryNames, regions } ) => {
+
+    let navigate = useNavigate()
+
+    const goToPage = (url: string) => {
+        navigate(url)
+    }
     
     const [dropMenu, setDropMenu] = useState<boolean>(false)
 
@@ -63,13 +69,15 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
             toggleMainMenu()
         }} className={showClass}>
               <animated.div style={slideMenuStyle} onClick={(e)=> e.stopPropagation()} className={style.hamMenu}>
-                    <Link to='/' onClick={()=> {
+                    <div className={style.hamMenuLink} onClick={()=> {
+                        goToPage('/')
                         toggleMainMenu()
-                    }}>Home</Link>
+                    }}>Home</div>
                     {regions.map(reg=> {
-                        return <Link key={uuidv4()} onClick={()=> {
+                        return <div className={style.hamMenuLink} key={uuidv4()} onClick={()=> {
+                            goToPage('/countries/' + reg)
                             toggleMainMenu()
-                        }} to={'/countries/' + reg}>{reg}</Link>
+                        }}>{reg}</div>
                     })}
                 </animated.div>
         </div>

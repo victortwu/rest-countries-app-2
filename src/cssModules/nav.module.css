@@ -57,3 +57,7 @@
     display: none;
 }
 
+.hamMenuLink:hover {
+   cursor: pointer; 
+   border: solid 1px gray;
+}
