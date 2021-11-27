@@ -23,6 +23,13 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
         to: { opacity: dropMenu ? 1 : 0, translateX: dropMenu ? 0 : 500 },
         config: { duration: 200 }
     })
+
+   const spinBurger = useSpring({
+       from: { opacity: 1, rotate: 0 },
+       to: { opacity: dropMenu ? .7 : 1, rotate: dropMenu ? 90 : 0 },
+       config: { duration: 200 }
+   })
+    
     
     const toggleMainMenu = ():void => {
        
@@ -45,11 +52,11 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
         <nav className={style.container}>
             <DropDownSearch countryNames={countryNames}/>
             
-            <div onClick={()=> toggleMainMenu()} className={style.hamburger}>
+            <animated.div style={spinBurger} onClick={()=> toggleMainMenu()} className={style.hamburger}>
                 <div className={style.hamLine}/>
                 <div className={style.hamLine}/>
                 <div className={style.hamLine}/>
-            </div>
+            </animated.div>
         </nav>
 
         <div onClick={()=> {
