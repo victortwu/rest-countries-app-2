@@ -20,12 +20,35 @@
 
 .card {
   margin: 1rem;
-  padding: .5rem;
+  
   flex: 0 0 auto;
   width: 12rem;
   height: 25rem;
   box-shadow: 0 0 .3rem .01rem gray;
   border-radius: .5rem;
+}
+
+.imgContainer {
+  width: 100%;
+ 
+}
+
+.imgContainer > img {
+  max-width: 100%;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+
+.contentContainer {
+  margin: .5rem;
+  max-width: 100%;
+  border-top: solid 1px gray;
+}
+
+.content {
+  text-align: left;
+  padding: .5rem;
+  font-size: .9rem;
 }
 
 @keyframes fadeIn {

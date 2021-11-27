@@ -25,8 +25,15 @@ const Countries: FC<Props> = ( { countries } ) => {
                     {countries.map(country=> {
                         if (country.region === params.region) {
                             return <div className={style.card} key={uuidv4()} onClick={()=> goToPage(`showpage/${country.name.common}`)}>
-                            {country.name.common}
-                            </div>
+                                        <div className={style.imgContainer}><img src={country.flags.svg} alt='flag'/></div>
+                                        {country.name.common}
+                                        <div className={style.contentContainer}>
+                                            <div className={style.content}>
+                                                <p>Capital: {country.capital?.map((cap: string)=> {return <span key={uuidv4()}>{cap}</span>})}</p>
+                                                <p>Population: {country.population.toLocaleString('en-US')}</p>
+                                            </div>    
+                                        </div>    
+                                    </div>
                         }
 
                     })}
