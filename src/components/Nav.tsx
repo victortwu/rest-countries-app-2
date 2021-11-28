@@ -33,7 +33,7 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
    const spinBurger = useSpring({
        from: { opacity: 1, rotate: 0 },
        to: { opacity: dropMenu ? .7 : 1, rotate: dropMenu ? 90 : 0 },
-       config: { duration: 200 }
+       config: { duration: 100 }
    })
     
     
