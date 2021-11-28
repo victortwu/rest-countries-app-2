@@ -55,16 +55,20 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                     <div className={style.imgContainer}>
                                         <img src={nation.flags.svg} alt='flag'/>
                                     </div>
+                                    <p>Official name:</p> 
+                                    <h2>{nation.name.official}</h2>
+                                    
+                                </div>
+
+                                <div className={style.containerRight}>
                                     <h4>Capital: {nation.capital?.map((cap:string)=> {return <span key={uuidv4()}>{cap}</span>})}</h4>
                                     <p>Population: {nation.population.toLocaleString('en-US')}</p>
                                     <p>Region: {nation.region}</p>
                                     <p>Subregion: {nation.subregion}</p>
-                                </div>
-
-                                <div className={style.containerRight}>
                                     <p>Languages: {getLanguages(nation.languages)}</p>
                                     <p>Currencies: {getCurrencies(nation.currencies)}</p>
                                     <div className={style.bordersDiv}>
+                                        <p>Borders:</p>
                                         {
                                             nation.borders?.map((code: string, i: number)=> {
                                                 return <button onClick={()=> setCountryParam(countryCodeObj[code])} key={uuidv4()}>{countryCodeObj[code]}</button>
