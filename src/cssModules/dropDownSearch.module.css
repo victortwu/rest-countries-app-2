@@ -1,5 +1,6 @@
 .searchBar {
     margin-left: 1rem;
+    color: var(--deepBlue)
 }
 
 .menuWrapper {

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import style from '../cssModules/home.module.css'
 
+
 interface Props {
     regions: string[]
 }
@@ -17,7 +18,7 @@ const Home: FC<Props> = ( { regions } ) => {
     
     return(
         <div className={style.container}>
-            <h1 className={style.title}>Where in the world?</h1>
+            <h1 className={style.title}>Where in the <span className={style.world}>world</span><span className={style.qMark}>?</span></h1>
             <div className={style.cardContainer}>
                 {regions.map(reg=> {
                     return <div key={uuidv4()} className={style.card} onClick={()=> goToRegion('/countries/' + reg)}>

@@ -19,7 +19,7 @@
 
 .hamMenu {
     position: absolute;
-    background-color: var(--gray2);
+    background-color: var(--deepBlue);
     width: 50%;
     height: 80%;
     padding: 1rem;
@@ -27,12 +27,13 @@
     right: 0;
     text-align: left;
     font-size: larger;
+    color: var(--offWhite);
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-direction: column;
     border-top-left-radius: .5rem;
     border-bottom-left-radius: .5rem;
-    box-shadow: 0 0 .6rem .01rem gray;
+    box-shadow: 0 .5rem .7rem #272727;
     
 }
 
@@ -47,14 +48,19 @@
 }
 
 .hamLine {
-    background-color: gray;
+    background-color: var(--deepBlue);
     height: .2rem;
     width: 100%;
-    border-radius: 50%;
+    border-radius: 20px;
+    border-right: solid 3px var(--canary);
 }
 
 .hide {
     display: none;
+}
+
+.hamMenuLink {
+    margin-left: 2rem;
 }
 
 .hamMenuLink:hover {

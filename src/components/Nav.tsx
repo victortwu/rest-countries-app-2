@@ -69,7 +69,7 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
             toggleMainMenu()
         }} className={showClass}>
               <animated.div style={slideMenuStyle} onClick={(e)=> e.stopPropagation()} className={style.hamMenu}>
-                    <div className={style.hamMenuLink} onClick={()=> {
+                    <div style={{color: 'var(--hotPink)'}} className={style.hamMenuLink} onClick={()=> {
                         goToPage('/')
                         toggleMainMenu()
                     }}>Home</div>

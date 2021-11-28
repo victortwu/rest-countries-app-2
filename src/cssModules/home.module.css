@@ -1,13 +1,24 @@
 .container {
-    
+    background-image: url('../assets/world.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
     height: 100%;
     width: 100%;
-
+    color: var(--offWhite);
     animation: fadeIn 1s;
 }
 
 .title {
-    color: var(--gray1)
+    color: var(--offWhite);
+}
+
+.world {
+    color: var(--hotPink);
+    font-size: 2.4rem;
+}
+
+.qMark {
+    color: var(--canary)
 }
 
 .cardContainer {
@@ -19,13 +30,24 @@
 }
 
 .card {
-    background-color: var(--gray3);
+    background-color: rgba(255,255,255, .2);
     margin: .5rem;
     height: 10rem;
-    width: 15rem;
-    color: var(--gray1);
-    border-radius: .5rem;
-    box-shadow: 0 0 .5rem .01rem gray;
+    width: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--canary);
+    border-radius: 3rem;
+    border: solid 1px var(--hotPink);
+    transition: .2s;
+}
+
+.card:hover {
+    cursor: pointer;
+    
+    transform: scale(1.1);
+    
 }
 
 @keyframes fadeIn {

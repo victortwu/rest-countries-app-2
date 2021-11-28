@@ -6,10 +6,16 @@
   --gray3: #cccccc;
   --gray4: #bbbbbb;
   --darkGray: #333333;
-}
+  --skyBlue: #3198f4;
+  --deepBlue: #082c4e;
+  --canary: #ffcc02;
+  --hotPink: #ff6571;
+  --offWhite: #fbfcff;
+ }
 
 * {
   font-family: 'Source Sans Pro', sans-serif;
+  
 }
 
 body {
