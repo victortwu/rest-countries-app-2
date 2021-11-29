@@ -88,10 +88,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
         })
     }
 
-    interface Location {
-        loc: any[]
-    }
-    
+   
     useEffect(()=> {
         setCountryParam(countryParam)
         getLatLong()
