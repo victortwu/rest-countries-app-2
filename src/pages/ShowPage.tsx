@@ -16,7 +16,58 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
     let navigate = useNavigate()
 
     const [countryParam, setCountryParam] = useState<string | undefined>(params.country)
+    const [latLong, setLatLong] = useState([])
 
+    const baseUrl = 'http://dataservice.accuweather.com'
+    const apiKey = process.env.REACT_APP_WEATHERAPIKEY
+
+    const getWeatherInfo = (key: string) => {
+        fetch(`${baseUrl}/currentconditions/v1/${key}?apikey=${apiKey}`)
+        .then(res=> {
+            if(!res.ok) {
+                throw Error('Cannot get the weather')
+            }
+            return res.json()
+        })
+        .then(data=> {
+            console.log(data)
+        })
+        .catch(err=> {
+            console.error(err.message)
+        })
+    }
+    
+    const getKeyByGeo = (longLat: any[] ) => {
+        console.log(longLat[0])
+        console.log(longLat[1])
+        fetch(`${baseUrl}/locations/v1/cities/geoposition/search?apikey=${apiKey}=${longLat[0]},${longLat[1]}`)
+        .then(res=> {
+            console.log(res)
+            if(!res.ok) {
+                throw Error('Cannot get location')
+            }
+            return res.json()
+        })
+        .then(data=> {
+            console.log(data)
+            //getWeatherInfo(data.key)
+        })
+        .catch(err=> {
+            console.error(err.message)
+        })
+    }
+
+    const getLatLong = () => {
+        countries.map(nation=> {
+            if ( nation.name.common === countryParam ) {
+                console.log(nation.capitalInfo.latlng)
+                getKeyByGeo(nation.capitalInfo.latlng)
+            }
+        })
+    }
+
+   
+    
     const getLanguages = (lang: any) => {
         let langArr: string[] = []
         for ( const key in lang ) {
@@ -36,17 +87,24 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
             return <span key={uuidv4()}>{currency}{(i !== currArr.length - 1) ? ', ' : ''}</span>
         })
     }
+
+    interface Location {
+        loc: any[]
+    }
     
     useEffect(()=> {
         setCountryParam(countryParam)
+        getLatLong()
+       
     }, [countryParam])
-
+   
+   console.log(baseUrl)
     return(
         <div className={style.container}>
 
             {countries.map(nation=> {
                 if ( nation.name.common === countryParam ) {
-
+                    
                     return <div className={style.contentDiv} key={uuidv4()}>
 
                                 <div className={style.containerLeft}>
