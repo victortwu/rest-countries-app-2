@@ -16,7 +16,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
     let navigate = useNavigate()
 
     const [countryParam, setCountryParam] = useState<string | undefined>(params.country)
-   
+    const [clock, setClock] = useState('')
 
     const baseUrl = 'http://localhost:5000'
    
@@ -56,6 +56,69 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
         })
     }
 
+    const getIntTime = () => {
+        let timezone: string = ''
+        countries.map(nation=> {
+            if ( nation.name.common === countryParam ) {
+                nation.timezones.map((tz: string, i: number)=> { 
+                    if ( i === 0 ) {
+                        timezone =  tz
+                    }
+                 })
+            }
+        })
+      
+        let strArr = timezone.split('')
+        let tempArr = strArr.map(l=> {
+            let char
+            if ( l !== 'U' && l !== 'C' && l !== 'T' && l !== '+' ) {
+               if ( l === ':') {
+                   char = '.'
+               }
+               else {
+                   char = l
+               }
+            }
+            return char     
+         })
+        let result = tempArr.join('')
+        const numStrArr = tempArr.join('').split('.')
+       
+        if ( numStrArr[1] === '30') {
+            result = numStrArr[0] + '.50'
+        }
+        
+        const localDate = new Date()
+        const msTime = localDate.getTime()
+       
+        const localUtcOffset = localDate.getTimezoneOffset() * 60000 //get in ms
+        // current utc time
+        const utc = msTime + localUtcOffset
+        const localTimeMs = utc + (3600000 * Number(result))
+        const intDate = new Date(localTimeMs)
+
+        let hour: number | string = intDate.getHours()
+        let minute: number | string = intDate.getMinutes()
+        //let second: number | string = intDate.getSeconds()
+        let amPm: string = 'AM'
+
+        if ( hour === 0 ) {
+            hour = 12
+        }
+
+        if ( hour > 12 ) {
+            hour = hour - 12
+            amPm = 'PM'
+        }
+
+        hour = ( hour < 10 ) ? '0' + hour : hour
+        minute = ( minute < 10 ) ? '0' + minute : minute
+        //second = ( second < 10 ) ? '0' + second : second
+        setClock(`${hour}:${minute} ${amPm}`)
+        setTimeout(getIntTime, 60000)
+        
+    }
+    
     
     const getCurrencies = (curr: any) => {
         let currArr: string[] = []
@@ -70,8 +133,8 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
    
     useEffect(()=> {
         setCountryParam(countryParam)
-        getWeather()
-       
+        //getWeather()
+        getIntTime()
     }, [countryParam])
    
   
@@ -91,7 +154,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                     </div>
                                     <p>Official name:</p> 
                                     <h2>{nation.name.official}</h2>
-                                    
+                                    <h2>Local time: {clock}</h2>
                                 </div>
 
                                 <div className={style.containerRight}>
