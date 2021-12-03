@@ -55,6 +55,7 @@
 
 .weatherWidget {
   background-color: rgba(0,0,0,.4);
+ 
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -90,11 +91,16 @@
 
 @media screen and (max-width: 500px) {
   .contentDiv {
+   
     flex-direction: column;
-  }
-  .containerLeft, .containerRight {
-    width: 95%;
-    padding: 1rem;
    
   }
+  .containerLeft, .containerRight {
+    box-sizing: border-box;
+    width: 100%;
+  }
+  .imgContainer {
+    width: 100%;
+  }
+  
 }
