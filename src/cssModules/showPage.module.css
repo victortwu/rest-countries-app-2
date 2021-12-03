@@ -2,19 +2,57 @@
     width: 100%;
     height: 100vh;
     animation: fadeIn 1s;
+    color: var(--deepBlue);
 }
 
 .contentDiv {
   height: 100%;
   display: flex;
   justify-content: space-between;
-
 }
 
 .containerLeft, .containerRight {
   width: 45%;
   padding: 1rem;
   text-align: left;
+}
+
+.theseBtns {
+  background-color: rgba(0,0,0,.4);
+  color: var(--skyBlue);
+  border: none;
+  border-radius: .2rem;
+}
+
+.name {
+  color: var(--canary)
+}
+
+.subTitleDiv {
+  margin-top: 1rem;
+  
+}
+
+.officialLabel {
+  font-size: .8rem;
+}
+
+.officialName {
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.capital {
+  margin-top: 1rem;
+}
+
+.weatherWidget {
+  background-color: rgba(0,0,0,.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-radius: .5rem;
 }
 
 .imgContainer {
@@ -24,6 +62,18 @@
 .imgContainer > img {
   max-width: 100%;
 }
+
+.infoTable {
+  margin-top: 1rem;
+  font-size: .8rem;
+}
+
+.rowContent {
+  padding-left: 1rem;
+  
+}
+
+
 
 @keyframes fadeIn {
     0% { opacity: 0 }

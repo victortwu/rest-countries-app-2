@@ -17,17 +17,35 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
 
     const [countryParam, setCountryParam] = useState<string | undefined>(params.country)
     const [clock, setClock] = useState('')
+    const [weatherObj, setWeatherObj] = useState<any>({})
 
     const baseUrl = 'http://localhost:5000'
    
-    // accuweather fetch call to own backend, only 50 free calls a day
-    
+   // weatherMap calls openweathermap.org
+
     const getWeather = () => {
+        
+        let coordArr: number[] = []
+        let lat: string = ''
+        let long: string = ''
+        
         countries.map(nation=> {
             if ( nation.name.common === countryParam ) {
-                const coordArr: number[] = nation.capitalInfo.latlng
-                const coordStr: string = `${coordArr[0]},${coordArr[1]}`
-                fetch(`${baseUrl}/weather/${coordStr}`)
+              
+                if (!nation.capitolInfo) {
+                    console.log('LINE 33, IF', nation.latlng)
+                    coordArr = nation.latlng
+                    lat = `${coordArr[0]}`
+                    long = `${coordArr[1]}`
+                } else {
+                    console.log('LINE 38, ELSE')
+                    coordArr = nation.capitalInfo?.latlng
+                    lat = `${coordArr[0]}`
+                    long = `${coordArr[1]}`
+                }
+              
+           
+                fetch(`${baseUrl}/weatherMap/${lat}/${long}`)
                 .then(res=> {
                     return res
                 })
@@ -35,7 +53,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                     return data.json()
                 })
                 .then(json=> {
-                    console.log(json)
+                    setWeatherObj(json)
                 })
                 .catch(err=> {
                     console.error(err.message)
@@ -133,7 +151,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
    
     useEffect(()=> {
         setCountryParam(countryParam)
-        //getWeather()
+        getWeather()
         getIntTime()
     }, [countryParam])
    
@@ -147,28 +165,57 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                     return <div className={style.contentDiv} key={uuidv4()}>
 
                                 <div className={style.containerLeft}>
-                                    <button onClick={()=> navigate(-1)}>BACK</button>
-                                    <h1>{nation.name.common}</h1>
+                                    <button className={style.theseBtns} onClick={()=> navigate(-1)}>BACK</button>
+                                    <h1 className={style.name}>{nation.name.common}</h1>
+                                    <p>Population: {nation.population.toLocaleString('en-US')}</p>
                                     <div className={style.imgContainer}>
                                         <img src={nation.flags.svg} alt='flag'/>
                                     </div>
-                                    <p>Official name:</p> 
-                                    <h2>{nation.name.official}</h2>
-                                    <h2>Local time: {clock}</h2>
+                                    
+                                    <div className={style.subTitleDiv}>
+                                        <div className={style.officialLabel}>Official name:</div> 
+                                        <div className={style.officialName}>{nation.name.official}</div>
+                                        <div className={style.capital}>Capital: {nation.capital?.map((cap:string)=> {return <span className={style.capitalSpan} key={uuidv4()}>{cap}</span>})}</div>
+                                    </div>
                                 </div>
 
                                 <div className={style.containerRight}>
-                                    <h4>Capital: {nation.capital?.map((cap:string)=> {return <span key={uuidv4()}>{cap}</span>})}</h4>
-                                    <p>Population: {nation.population.toLocaleString('en-US')}</p>
-                                    <p>Region: {nation.region}</p>
-                                    <p>Subregion: {nation.subregion}</p>
-                                    <p>Languages: {getLanguages(nation.languages)}</p>
-                                    <p>Currencies: {getCurrencies(nation.currencies)}</p>
+                                    <div className={style.weatherWidget}>
+                                        <h2 style={{color: 'var(--skyBlue)'}}>Local time: {clock}</h2>
+                                        
+                                        <h1 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp} deg F</h1>
+                                        <h4 style={{color: 'var(--skyBlue)'}}>{nation.capital?.map((cap:string)=> {return <span style={{color: 'var(--hotPink)'}} key={uuidv4()}>{cap}</span>})}</h4>
+
+                                        <h4 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp_min}/{weatherObj.main?.temp_max} Feels like {weatherObj.main?.feels_like}</h4>
+                                    </div>
+
+                                    <table className={style.infoTable}>
+                                        <tbody>
+                                            <tr>
+                                                <td className={style.rowLabel}>Region:</td>
+                                                <td className={style.rowContent}>{nation.region}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className={style.rowLabel}>Subregion:</td>
+                                                <td className={style.rowContent}>{nation.subregion}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className={style.rowLabel}>Languages:</td>
+                                                <td className={style.rowContent}>{getLanguages(nation.languages)}</td>
+                                            </tr>
+                                            <tr>
+                                                <td className={style.rowLabel}>Currencies:</td>
+                                                <td className={style.rowContent}>{getCurrencies(nation.currencies)}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                  
+                                    
                                     <div className={style.bordersDiv}>
                                         <p>Borders:</p>
                                         {
                                             nation.borders?.map((code: string, i: number)=> {
-                                                return <button onClick={()=> setCountryParam(countryCodeObj[code])} key={uuidv4()}>{countryCodeObj[code]}</button>
+                                                return <button className={style.theseBtns} onClick={()=> setCountryParam(countryCodeObj[code])} key={uuidv4()}>{countryCodeObj[code]}</button>
                                             })
                                         }
                                     </div>
