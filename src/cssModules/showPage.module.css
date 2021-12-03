@@ -19,9 +19,16 @@
 
 .theseBtns {
   background-color: rgba(0,0,0,.4);
+  margin: .5rem;
   color: var(--skyBlue);
   border: none;
   border-radius: .2rem;
+  transition: .2s;
+}
+
+.theseBtns:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .name {
@@ -53,14 +60,17 @@
   justify-content: space-evenly;
   align-items: center;
   border-radius: .5rem;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 
 .imgContainer {
   width: 80%;
+  
 }
 
 .imgContainer > img {
   max-width: 100%;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
 
 .infoTable {
@@ -70,12 +80,21 @@
 
 .rowContent {
   padding-left: 1rem;
-  
 }
-
 
 
 @keyframes fadeIn {
     0% { opacity: 0 }
     100% { opacity: 1 }
+}
+
+@media screen and (max-width: 500px) {
+  .contentDiv {
+    flex-direction: column;
+  }
+  .containerLeft, .containerRight {
+    width: 95%;
+    padding: 1rem;
+   
+  }
 }

@@ -175,7 +175,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                     <div className={style.subTitleDiv}>
                                         <div className={style.officialLabel}>Official name:</div> 
                                         <div className={style.officialName}>{nation.name.official}</div>
-                                        <div className={style.capital}>Capital: {nation.capital?.map((cap:string)=> {return <span className={style.capitalSpan} key={uuidv4()}>{cap}</span>})}</div>
+                                        <div className={style.capital}>{(!nation.capital) ? '' : 'Capital: '} {nation.capital?.map((cap:string)=> {return <span className={style.capitalSpan} key={uuidv4()}>{cap}</span>})}</div>
                                     </div>
                                 </div>
 
@@ -183,10 +183,10 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                     <div className={style.weatherWidget}>
                                         <h2 style={{color: 'var(--skyBlue)'}}>Local time: {clock}</h2>
                                         
-                                        <h1 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp} deg F</h1>
+                                        <h1 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp} °F</h1>
                                         <h4 style={{color: 'var(--skyBlue)'}}>{nation.capital?.map((cap:string)=> {return <span style={{color: 'var(--hotPink)'}} key={uuidv4()}>{cap}</span>})}</h4>
 
-                                        <h4 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp_min}/{weatherObj.main?.temp_max} Feels like {weatherObj.main?.feels_like}</h4>
+                                        <h4 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp_min}° / {weatherObj.main?.temp_max}° Feels like {weatherObj.main?.feels_like}°</h4>
                                     </div>
 
                                     <table className={style.infoTable}>
@@ -213,11 +213,13 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                     
                                     <div className={style.bordersDiv}>
                                         <p>Borders:</p>
+                                        
                                         {
                                             nation.borders?.map((code: string, i: number)=> {
                                                 return <button className={style.theseBtns} onClick={()=> setCountryParam(countryCodeObj[code])} key={uuidv4()}>{countryCodeObj[code]}</button>
                                             })
                                         }
+                                       
                                     </div>
                                 </div>
                             </div>
