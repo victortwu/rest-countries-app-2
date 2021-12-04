@@ -10,14 +10,16 @@ import './App.css';
 import { promises } from 'dns';
 import TestComponent from './components/TestComponent';
 
+
+
+
 const App: FC = () => {
   
   const { data: countries, countryNames, regions, countryCodeObj, isPending, error } = useFetchEverything(countriesAllUrl)
-
  
   return (
     <BrowserRouter>
-   
+  
       <div className="App">
       <Nav  countryNames={countryNames} regions={regions}/>
         <Routes>
@@ -27,6 +29,7 @@ const App: FC = () => {
           <Route path='/test' element={<TestComponent />}/>
         </Routes>
       </div>
+    
     </BrowserRouter>
   );
 }

@@ -55,7 +55,7 @@
 
 .weatherWidget {
   background-color: rgba(0,0,0,.4);
- 
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -63,6 +63,52 @@
   border-radius: .5rem;
   box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
 }
+
+.timeLabel, 
+.clock, 
+.feelsLikeSpan, 
+.mainTempSpan {
+  color: var(--offWhite);
+}
+
+.timeLabel {
+  font-size: .8rem;
+}
+
+.clock {
+  font-size: x-large;
+}
+
+.capDiv {
+  margin: 1rem;
+  display: flex;
+}
+
+.iconCnt {
+  margin-left: .5rem;
+  width: 1rem;
+  height: 1rem;
+}
+
+.tempDiv {
+  background-color: var(--deepBlue);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: .5rem;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2);
+}
+
+.mainTempSpan {
+  font-size: 2rem;
+  
+}
+
+.conditions {
+  margin-top: .5rem;
+  color: var(--skyBlue);
+}
+
 
 .imgContainer {
   width: 80%;

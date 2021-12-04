@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { createLanguageServiceSourceFile } from 'typescript'
 import { v4 as uuidv4 } from 'uuid'
+import { ReactComponent as MapIcon } from '../assets/mapIcon.svg'
 import style from '../cssModules/showPage.module.css'
 
 
@@ -34,12 +35,12 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
             if ( nation.name.common === countryParam ) {
               
                 if (!nation.capitolInfo) {
-                    console.log('LINE 33, IF', nation.latlng)
+                    
                     coordArr = nation.latlng
                     lat = `${coordArr[0]}`
                     long = `${coordArr[1]}`
                 } else {
-                    console.log('LINE 38, ELSE')
+                 
                     coordArr = nation.capitalInfo?.latlng
                     lat = `${coordArr[0]}`
                     long = `${coordArr[1]}`
@@ -184,12 +185,25 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
 
                                 <div className={style.containerRight}>
                                     <div className={style.weatherWidget}>
-                                        <h2 style={{color: 'var(--skyBlue)'}}>Local time: {clock}</h2>
+                                        <div className={style.localTime}>
+                                            <span className={style.timeLabel}>Local time: </span>
+                                            <span className={style.clock}>{clock}</span>
+                                        </div>
                                         
-                                        {loading ? 'loading...': <h1 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp} °F</h1>}
-                                        <h4 style={{color: 'var(--skyBlue)'}}>{nation.capital?.map((cap:string)=> {return <span style={{color: 'var(--hotPink)'}} key={uuidv4()}>{cap}</span>})}</h4>
+                                        <div className={style.capDiv}>{nation.capital?.map((cap:string)=> {return <span style={{color: 'var(--hotPink)'}} key={uuidv4()}>{cap.toUpperCase()}</span>})} <div className={style.iconCnt}><MapIcon/></div></div>
+                                        
+                                        {loading ? 'loading...':<div className={style.tempDiv}>    
+                                                 <span className={style.mainTempSpan}>{weatherObj.main?.temp} °F</span>
+                                                
+                                                
 
-                                        <h4 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp_min}° / {weatherObj.main?.temp_max}° Feels like {weatherObj.main?.feels_like}°</h4>
+                                                <span className={style.feelsLikeSpan}>Feels like {weatherObj.main?.feels_like}°F</span>
+
+                                                <div className={style.conditions}>
+                                            {weatherObj.weather[0].description}
+                                        </div>
+                                        </div>}
+                                        
                                     </div>
 
                                     <table className={style.infoTable}>

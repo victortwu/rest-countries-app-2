@@ -9,8 +9,8 @@ interface Props {
     isPending: boolean
 }
 
-const Home: FC<Props> = ( { regions, isPending } ) => {
-    
+const Home:FC<Props> = (  { regions, isPending } ) => {
+
     let navigate = useNavigate()
 
     const goToRegion = (url: string) => {
