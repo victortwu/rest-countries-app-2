@@ -5,9 +5,10 @@ import style from '../cssModules/countries.module.css'
 
 interface Props {
     countries: any[]
+    isPending: boolean
 }
 
-const Countries: FC<Props> = ( { countries } ) => {
+const Countries: FC<Props> = ( { countries, isPending } ) => {
 
     let params = useParams()
     let navigate = useNavigate()
@@ -16,6 +17,9 @@ const Countries: FC<Props> = ( { countries } ) => {
       navigate(url)
     }
 
+    if ( isPending ) {
+        return <div>loading...</div>
+    }
 
     return (
         <div className={style.container}>

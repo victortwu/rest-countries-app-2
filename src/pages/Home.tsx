@@ -6,18 +6,24 @@ import style from '../cssModules/home.module.css'
 
 interface Props {
     regions: string[]
+    isPending: boolean
 }
 
-const Home: FC<Props> = ( { regions } ) => {
+const Home: FC<Props> = ( { regions, isPending } ) => {
     
     let navigate = useNavigate()
 
     const goToRegion = (url: string) => {
         navigate(url)
     }
+
+    if ( isPending ) {
+        return <div>loading...</div>
+    }
     
     return(
         <div className={style.container}>
+            <div className={style.bgImgDiv}/>
             <h1 className={style.title}>Where in the <span className={style.world}>world</span><span className={style.qMark}>?</span></h1>
             <div className={style.cardContainer}>
                 {regions.map(reg=> {
@@ -33,4 +39,3 @@ const Home: FC<Props> = ( { regions } ) => {
 }
 
 export default Home
-//<Link to={'/countries/' + reg}>{reg}</Link>

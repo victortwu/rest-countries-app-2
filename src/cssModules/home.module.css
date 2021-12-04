@@ -1,11 +1,24 @@
 .container {
-    background-image: url('../assets/world.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
+    position: relative;
+    /* background-repeat: no-repeat;
+    background-size: contain; */
     height: 100%;
     width: 100%;
     color: var(--offWhite);
     animation: fadeIn 1s;
+    z-index: 0;
+}
+
+.bgImgDiv {
+    position: fixed;
+    background-image: url('../assets/world.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    top: 12rem;
+    left: 0;
+    right: 0;
+    height: 80%;
+    z-index: -1;
 }
 
 .title {
@@ -26,11 +39,11 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    align-content: flex-start;
 }
 
 .card {
-    background-color: rgba(255,255,255, .2);
+    background-color: rgba(255,255,255, .3);
     margin: .5rem;
     height: 10rem;
     width: 10rem;
@@ -45,9 +58,7 @@
 
 .card:hover {
     cursor: pointer;
-    
     transform: scale(1.1);
-    
 }
 
 @keyframes fadeIn {

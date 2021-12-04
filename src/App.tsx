@@ -14,15 +14,15 @@ const App: FC = () => {
   
   const { data: countries, countryNames, regions, countryCodeObj, isPending, error } = useFetchEverything(countriesAllUrl)
 
-  console.log(countries[10])
+ 
   return (
     <BrowserRouter>
    
       <div className="App">
       <Nav  countryNames={countryNames} regions={regions}/>
         <Routes>
-          <Route path='/' element={<Home regions={regions}/>}/>
-          <Route path='/countries/:region' element={<Countries countries={countries} />} />
+          <Route path='/' element={<Home regions={regions} isPending={isPending}/>}/>
+          <Route path='/countries/:region' element={<Countries countries={countries} isPending={isPending} />} />
           <Route path='countries/:region/showpage/:country' element={<ShowPage countries={countries} countryCodeObj={countryCodeObj}/>} />
           <Route path='/test' element={<TestComponent />}/>
         </Routes>
