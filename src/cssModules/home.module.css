@@ -1,7 +1,5 @@
 .container {
     position: relative;
-    /* background-repeat: no-repeat;
-    background-size: contain; */
     height: 100%;
     width: 100%;
     color: var(--offWhite);

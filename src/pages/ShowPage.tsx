@@ -18,6 +18,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
     const [countryParam, setCountryParam] = useState<string | undefined>(params.country)
     const [clock, setClock] = useState('')
     const [weatherObj, setWeatherObj] = useState<any>({})
+    const [loading, setLoading] = useState(true)
 
     const baseUrl = 'http://localhost:5000'
    
@@ -54,9 +55,11 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                 })
                 .then(json=> {
                     setWeatherObj(json)
+                    setLoading(false)
                 })
                 .catch(err=> {
                     console.error(err.message)
+                    setLoading(false)
                 })
             }
         })
@@ -183,7 +186,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                     <div className={style.weatherWidget}>
                                         <h2 style={{color: 'var(--skyBlue)'}}>Local time: {clock}</h2>
                                         
-                                        <h1 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp} °F</h1>
+                                        {loading ? 'loading...': <h1 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp} °F</h1>}
                                         <h4 style={{color: 'var(--skyBlue)'}}>{nation.capital?.map((cap:string)=> {return <span style={{color: 'var(--hotPink)'}} key={uuidv4()}>{cap}</span>})}</h4>
 
                                         <h4 style={{color: 'var(--offWhite)'}}>{weatherObj.main?.temp_min}° / {weatherObj.main?.temp_max}° Feels like {weatherObj.main?.feels_like}°</h4>
