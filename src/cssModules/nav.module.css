@@ -21,7 +21,7 @@
     position: absolute;
     background-color: var(--deepBlue);
     width: 50%;
-    height: 80%;
+    height: calc(100vh - 10rem);
     padding: 1rem;
     top: 0;
     right: 0;
