@@ -23,7 +23,7 @@ const Countries: FC<Props> = ( { countries, isPending } ) => {
 
     return (
         <div className={style.container}>
-            <h2 className={style.title}>{params.region}</h2>
+            <div className={style.title}><h2>{params.region}</h2></div>
             <div className={style.scrollContainer}>
                 <div className={style.scroller}>
                     {countries.map(country=> {

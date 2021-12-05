@@ -4,6 +4,7 @@ import { createLanguageServiceSourceFile } from 'typescript'
 import { v4 as uuidv4 } from 'uuid'
 import { ReactComponent as MapIcon } from '../assets/mapIcon.svg'
 import style from '../cssModules/showPage.module.css'
+import WeatherWidget from '../components/WeatherWidget'
 
 
 interface Props {
@@ -195,30 +196,13 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                 </div>
 
                                 <div className={style.containerRight}>
-                                    <div className={style.weatherWidget}>
-                                        <div className={style.localTime}>
-                                            <span className={style.timeLabel}>Local time: </span>
-                                            <span className={style.clock}>{clock}</span>
-                                        </div>
-                                        
-                                        <div className={style.capDiv}>
-                                            <span>{capital.toUpperCase()}</span>
-                                            <div className={style.iconCnt}><MapIcon/></div>
-                                        </div>
-                                        
-                                        {loading ? 'loading...':<div className={style.tempDiv}>    
-                                                 <span className={style.mainTempSpan}>{weatherObj.main?.temp} °F</span>
-                                                
-                                                
-
-                                                <span className={style.feelsLikeSpan}>Feels like {weatherObj.main?.feels_like}°F</span>
-
-                                                <div className={style.conditions}>
-                                            {weatherObj.weather?.map((w:any)=> { return <span>{w.description}</span>})}
-                                        </div>
-                                        </div>}
-                                        
-                                    </div>
+                                    
+                                <WeatherWidget 
+                                    weatherObj={weatherObj} 
+                                    loading={loading}
+                                    capital={capital}
+                                    clock={clock} 
+                                />
 
                                     <table className={style.infoTable}>
                                         <tbody>
@@ -257,7 +241,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
 
                 }
             })}
-
+           
         </div>
     )
 }

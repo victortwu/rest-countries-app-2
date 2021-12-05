@@ -2,8 +2,11 @@
     animation: fadeIn 1s;
 }
 
-.title { 
+.title {
+  text-align: left;
+  margin-left: 1rem; 
   color: var(--offWhite);
+  animation: slideIn 1s;
 }
 
 .scrollContainer {
@@ -78,4 +81,15 @@
 @keyframes fadeIn {
     0% { opacity: 0 }
     100% { opacity: 1 }
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(800px)
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0)
+  }
 }
