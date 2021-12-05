@@ -82,6 +82,7 @@
 .capDiv {
   margin: 1rem;
   display: flex;
+  color: var(--hotPink)
 }
 
 .iconCnt {

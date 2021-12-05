@@ -17,6 +17,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
     let navigate = useNavigate()
 
     const [countryParam, setCountryParam] = useState<string | undefined>(params.country)
+    const [capital, setCapital] = useState('')
     const [clock, setClock] = useState('')
     const [weatherObj, setWeatherObj] = useState<any>({})
     const [loading, setLoading] = useState(true)
@@ -66,7 +67,13 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
         })
     }
 
-   
+   const getCapital = () => {
+       countries.map(nation=> {
+           if ( nation.name.common === countryParam ) {
+               setCapital(nation.capital?.[0])
+           }
+       })
+   }
     
     const getLanguages = (lang: any) => {
         let langArr: string[] = []
@@ -157,6 +164,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
         setCountryParam(countryParam)
         getWeather()
         getIntTime()
+        getCapital()
     }, [countryParam])
    
   
@@ -179,7 +187,10 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                     <div className={style.subTitleDiv}>
                                         <div className={style.officialLabel}>Official name:</div> 
                                         <div className={style.officialName}>{nation.name.official}</div>
-                                        <div className={style.capital}>{(!nation.capital) ? '' : 'Capital: '} {nation.capital?.map((cap:string)=> {return <span className={style.capitalSpan} key={uuidv4()}>{cap}</span>})}</div>
+                                        
+                                        {!capital ? '' :<div className={style.capital}>
+                                            Capital: <span className={style.capitalSpan}>{capital}</span>
+                                        </div>}
                                     </div>
                                 </div>
 
@@ -190,7 +201,10 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                             <span className={style.clock}>{clock}</span>
                                         </div>
                                         
-                                        <div className={style.capDiv}>{nation.capital?.map((cap:string)=> {return <span style={{color: 'var(--hotPink)'}} key={uuidv4()}>{cap.toUpperCase()}</span>})} <div className={style.iconCnt}><MapIcon/></div></div>
+                                        <div className={style.capDiv}>
+                                            <span>{capital.toUpperCase()}</span>
+                                            <div className={style.iconCnt}><MapIcon/></div>
+                                        </div>
                                         
                                         {loading ? 'loading...':<div className={style.tempDiv}>    
                                                  <span className={style.mainTempSpan}>{weatherObj.main?.temp} °F</span>
@@ -200,7 +214,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
                                                 <span className={style.feelsLikeSpan}>Feels like {weatherObj.main?.feels_like}°F</span>
 
                                                 <div className={style.conditions}>
-                                            {weatherObj.weather[0].description}
+                                            {weatherObj.weather?.map((w:any)=> { return <span>{w.description}</span>})}
                                         </div>
                                         </div>}
                                         
