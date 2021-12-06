@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import style from '../cssModules/countries.module.css'
 
@@ -15,15 +15,16 @@ const Countries: FC<Props> = ( { countries, isPending } ) => {
 
     const goToPage = (url: string) => {
       navigate(url)
-    }
-
+    }    
+    
     if ( isPending ) {
         return <div>loading...</div>
     }
 
+    
     return (
         <div className={style.container}>
-            <div className={style.title}><h2>{params.region}</h2></div>
+          
             <div className={style.scrollContainer}>
                 <div className={style.scroller}>
                     {countries.map(country=> {

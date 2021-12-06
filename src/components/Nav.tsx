@@ -1,22 +1,29 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
-import DropDownSearch from './DropDownSearch'
+import { ReactComponent as GlobeIcon } from '../assets/globeIcon.svg'
 import style from '../cssModules/nav.module.css'
 import { useSpring, animated } from 'react-spring'
+import { AnyFn } from '@react-spring/types'
 
 interface Props {
     regions: string[]
     countryNames: string[]
+    changeTitle: AnyFn
+    title: string
 }
 
-const Nav: FC<Props> = ( { countryNames, regions } ) => {
+const Nav: FC<Props> = ( { countryNames, regions, changeTitle, title } ) => {
 
     let navigate = useNavigate()
 
     const goToPage = (url: string) => {
         navigate(url)
     }
+    
+    
+
+    const [slidInTitle, setSlidInTitle] = useState<boolean>(false)
     
     const [dropMenu, setDropMenu] = useState<boolean>(false)
 
@@ -35,6 +42,8 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
        to: { opacity: dropMenu ? .7 : 1, rotate: dropMenu ? 90 : 0 },
        config: { duration: 100 }
    })
+
+
     
     
     const toggleMainMenu = ():void => {
@@ -51,12 +60,20 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
             setDropMenu(true)
         }
     }
+
+    useEffect(()=> {
+        setSlidInTitle(true)
+        return setSlidInTitle(false)
+    }, [title])
  
     return(
         <>
         
         <nav className={style.container}>
-            <DropDownSearch countryNames={countryNames}/>
+            {title ? <div className={style.title} onClick={()=> {
+                goToPage('/')
+                changeTitle('')
+                }}><h2>{title}</h2></div> : <div className={style.iconDiv}><GlobeIcon/></div>}
             
             <animated.div style={spinBurger} onClick={()=> toggleMainMenu()} className={style.hamburger}>
                 <div className={style.hamLine}/>
@@ -72,11 +89,14 @@ const Nav: FC<Props> = ( { countryNames, regions } ) => {
                     <div style={{color: 'var(--hotPink)'}} className={style.hamMenuLink} onClick={()=> {
                         goToPage('/')
                         toggleMainMenu()
+                        changeTitle('')
                     }}>Home</div>
                     {regions.map(reg=> {
                         return <div className={style.hamMenuLink} key={uuidv4()} onClick={()=> {
                             goToPage('/countries/' + reg)
                             toggleMainMenu()
+                            changeTitle(reg)
+                            
                         }}>{reg}</div>
                     })}
                 </animated.div>

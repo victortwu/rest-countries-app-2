@@ -8,6 +8,18 @@
    
 }
 
+.iconDiv {
+    margin-left: 1rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+.title {
+    margin-left: 1rem;
+    color: var(--deepBlue);
+    animation: slideIn 1s;
+}
+
 .mainMenuWrap {
    position: absolute;
    top: 5rem;
@@ -67,3 +79,14 @@
    cursor: pointer; 
    border: solid 1px gray;
 }
+
+@keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateX(800px)
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0)
+    }
+  }
