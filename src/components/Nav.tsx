@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import { ReactComponent as GlobeIcon } from '../assets/globeIcon.svg'
@@ -23,7 +23,7 @@ const Nav: FC<Props> = ( { countryNames, regions, changeTitle, title } ) => {
     
     
 
-    const [slidInTitle, setSlidInTitle] = useState<boolean>(false)
+    //const [slidInTitle, setSlidInTitle] = useState<boolean>(false)
     
     const [dropMenu, setDropMenu] = useState<boolean>(false)
 
@@ -43,6 +43,12 @@ const Nav: FC<Props> = ( { countryNames, regions, changeTitle, title } ) => {
        config: { duration: 100 }
    })
 
+//    const slideTitleStyle = useSpring({
+//        from: { opacity: 0, translateX: 800 },
+//        to: { opacity: slidInTitle ? 1 : 0, translateX: slidInTitle ? 0 : 800 }
+
+//    })
+
 
     
     
@@ -61,10 +67,10 @@ const Nav: FC<Props> = ( { countryNames, regions, changeTitle, title } ) => {
         }
     }
 
-    useEffect(()=> {
-        setSlidInTitle(true)
-        return setSlidInTitle(false)
-    }, [title])
+    // useEffect(()=> {
+    //     setSlidInTitle(true)
+    //     return setSlidInTitle(false)
+    // }, [title])
  
     return(
         <>

@@ -17,7 +17,7 @@
 .title {
     margin-left: 1rem;
     color: var(--deepBlue);
-    animation: slideIn 1s;
+    /* animation: slideIn 1s; */
 }
 
 .mainMenuWrap {
