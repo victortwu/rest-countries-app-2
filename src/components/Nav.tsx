@@ -5,6 +5,7 @@ import { ReactComponent as GlobeIcon } from '../assets/globeIcon.svg'
 import style from '../cssModules/nav.module.css'
 import { useSpring, animated } from 'react-spring'
 import { AnyFn } from '@react-spring/types'
+import SearchBar from './SearchBar'
 
 interface Props {
     regions: string[]
@@ -105,6 +106,7 @@ const Nav: FC<Props> = ( { countryNames, regions, changeTitle, title } ) => {
                             
                         }}>{reg}</div>
                     })}
+                    <SearchBar countryNames={countryNames} />
                 </animated.div>
         </div>
         

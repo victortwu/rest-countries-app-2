@@ -33,7 +33,7 @@ const App: FC = () => {
           <Route path='/' element={<Home regions={regions} isPending={isPending} changeTitle={changeTitle} /> }/>
           <Route path='/countries/:region' element={<Countries countries={countries} isPending={isPending} />} />
           <Route path='countries/:region/showpage/:country' element={<ShowPage countries={countries} countryCodeObj={countryCodeObj}/>} />
-          <Route path='/test' element={<SearchBar countryNames={countryNames}/>}/>
+          {/* <Route path='/test' element={<SearchBar countryNames={countryNames}/>}/> */}
         </Routes>
       </div>
     

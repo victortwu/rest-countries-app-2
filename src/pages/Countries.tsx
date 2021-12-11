@@ -2,6 +2,8 @@ import React, { FC } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { v4 as uuidv4 } from 'uuid'
 import style from '../cssModules/countries.module.css'
+import SearchBar from '../components/SearchBar'
+
 
 interface Props {
     countries: any[]
@@ -10,12 +12,23 @@ interface Props {
 
 const Countries: FC<Props> = ( { countries, isPending } ) => {
 
+   
+    
     let params = useParams()
     let navigate = useNavigate()
+    
 
     const goToPage = (url: string) => {
       navigate(url)
-    }    
+    }
+    
+    const getElement = (elString:string) => {
+        console.log(elString)
+       const selected = document.getElementById(elString)
+       selected?.scrollIntoView(true)
+    }
+
+   
     
     if ( isPending ) {
         return <div>loading...</div>
@@ -28,8 +41,9 @@ const Countries: FC<Props> = ( { countries, isPending } ) => {
             <div className={style.scrollContainer}>
                 <div className={style.scroller}>
                     {countries.map(country=> {
+                        const id = country.name.common.toLowerCase()
                         if (country.region === params.region) {
-                            return <div className={style.card} key={uuidv4()} onClick={()=> goToPage(`showpage/${country.name.common}`)}>
+                            return <div id={id} className={style.card} key={uuidv4()} onClick={()=> goToPage(`showpage/${country.name.common}`)}>
                                         <div className={style.imgContainer}><img src={country.flags.svg} alt='flag'/></div>
                                         <span className={style.name}>{country.name.common}</span>
                                         <div className={style.contentContainer}>
@@ -43,6 +57,7 @@ const Countries: FC<Props> = ( { countries, isPending } ) => {
 
                     })}
                 </div>
+               
             </div>
         </div>
     )

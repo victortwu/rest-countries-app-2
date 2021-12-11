@@ -2,6 +2,7 @@ import React, { FC, useState, useRef } from 'react'
 
 interface Props {
     countryNames: string[]
+  
 }
 
 const SearchBar: FC<Props> = ( { countryNames } ) => {
@@ -13,9 +14,10 @@ const SearchBar: FC<Props> = ( { countryNames } ) => {
     inputRef.current?.focus()
     
     const searchCountries = (inputStr:string) => {
-        countryNames.map(name=> {
-         if ( name.toLowerCase().includes(inputStr.toLowerCase()) ) {
-                setSearchInput(name)
+        countryNames.map(country=> {
+         if ( country.toLowerCase().includes(inputStr.toLowerCase()) ) {
+                setSearchInput(country)
+                
             }
        })
     }
