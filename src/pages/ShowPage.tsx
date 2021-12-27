@@ -23,7 +23,7 @@ const ShowPage: FC<Props> = ( { countries, countryCodeObj } ) => {
     const [weatherObj, setWeatherObj] = useState<any>({})
     const [loading, setLoading] = useState(true)
 
-    const baseUrl = 'http://localhost:5000'
+    const baseUrl = 'http://localhost:4000'
    
    // weatherMap calls openweathermap.org
 
